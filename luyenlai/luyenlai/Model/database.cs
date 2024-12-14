@@ -32,6 +32,50 @@ namespace luyenlai.Model
             return dt;
 
         }
+        public void add(Sach s)
+        {
+            openconn();
+            string sql = "insert into Sach values(@MaSach,@TenSach,@NhaXB,@NamXB,@TacGia,@DonGia,@Hinhanh)";
+            SqlCommand cmd = new SqlCommand(sql,conn);
+            cmd.Parameters.Add("@MaSach",s.MaSach);
+            cmd.Parameters.Add("@TenSach", s.TenSach);
+            cmd.Parameters.Add("@NhaXB", s.NhaXB);
+            cmd.Parameters.Add("@NamXB", s.Namxb);
+            cmd.Parameters.Add("@TacGia", s.Tacgia);
+            cmd.Parameters.Add("@DonGia", s.Dongia);
+            cmd.Parameters.Add("@Hinhanh", s.Hinhanh);
+            cmd.ExecuteNonQuery();
+            closeconn();
+        }
+        public Boolean checkBookID(string ms)
+        {
+            DataTable tb = new DataTable();
+            string sql = "select *from Sach where MaSach = @MaSach";
+            openconn();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@MaSach", ms);
+            SqlDataReader dr = cmd.ExecuteReader();
+            tb.Load(dr);
+            closeconn();
+            if (tb.Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void delete(string ms)
+        {
+            openconn();
+            string sql = "delete from Sach where MaSach = @MaSach";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@MaSach", ms);
+            cmd.ExecuteNonQuery();
+            closeconn();
+        }
+
 
     }
 }
