@@ -1,0 +1,51 @@
+﻿@model IEnumerable<luyendoanhnghiep.Models.HoaDonBan>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhachHang.HoTen_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sach.TenSach)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhachHang.HoTen_)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sach.TenSach)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaHD_ }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaHD_ }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaHD_ })
+        </td>
+    </tr>
+}
+
+</table>
